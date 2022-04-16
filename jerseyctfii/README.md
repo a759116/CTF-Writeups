@@ -44,7 +44,7 @@ p.interactive()
 
 **Solution:** I tried opening the given "flag_mod.jpg" file and got the error below.
 
-![image](https://user-images.githubusercontent.com/8462520/163688877-24ba57f0-7e95-4155-8151-c9f253958222.png)
+![Error](https://github.com/a759116/CTF-Writeups/blob/main/jerseyctfii/src/flag_mod_error.png)
 
 I then googled for any any CTF write-ups for corrupted images and came across [Corrupt Transmission](https://github.com/blinils/CTF/blob/master/CTF-Jeopardy/2016-icectf/challenges/corrupt-transmission-50/README.md). This gave me some good ideas to work on and introduced me to the tool **exiftool**. The write-up was for .png file, but I was dealing with .jpg file. With further research, I came across [JPG Sihgnature Format](https://www.file-recovery.com/jpg-signature-format.htm#:~:text=JPEG%2FJFIF%2C%20it%20is%20the,hex%20values%20FF%20D8%20FF). I learnt that the .jpg file should start with an image marker which always contains the marker code hex values FF D8 FF E0. I then opened the given file using **xxd**
 
@@ -52,7 +52,7 @@ I then googled for any any CTF write-ups for corrupted images and came across [C
 
 The given file was starting with **00 10 4a 46** rather than required bytes **FF D8 FF E0**. Used the command ```printf '\xff\xd8\xff\xe0' | cat - flag_mod.jpg > new_flag.jpg``` to create a new .jpg file with correct signature. I was able to open the modified file and it revealed the flag.
 
-
+![Flag](https://github.com/a759116/CTF-Writeups/blob/main/jerseyctfii/src/new_flag.jpg)
 
 # Conclusion
 It was my first time participating in a CTF. It was exciting to see that I could apply my learning from the class. I had 
